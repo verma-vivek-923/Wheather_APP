@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Default dark theme / clear night */
+  --bg-color-top: #0f172a;
+  --bg-color-bottom: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --accent-color: #38bdf8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-primary);
+  overflow: hidden;
+  min-height: 100vh;
+  transition: background 1.5s ease-in-out;
+  background: linear-gradient(135deg, var(--bg-color-top), var(--bg-color-bottom));
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 24px;
+}
+
+/* App Container */
+.app-container {
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  z-index: 20;
+  position: relative;
+}
+
+/* Search Bar */
+.search-container {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.search-input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  padding: 1rem 1.5rem;
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.search-input:focus {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
+}
+
+.search-button {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent-color);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+}
+
+.search-button:hover {
+  transform: scale(1.05);
+  background: #0284c7;
+}
+
+.search-button:active {
+  transform: scale(0.95);
+}
+
+/* Weather Card */
+.weather-card {
+  padding: 2.5rem 2rem;
+  text-align: center;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.location-name {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.02em;
+}
+
+.location-country {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.temperature-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.temperature {
+  font-size: 5.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background: linear-gradient(to bottom, #fff, #cbd5e1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.temperature-unit {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.weather-desc {
+  font-size: 1.25rem;
+  font-weight: 400;
+  text-transform: capitalize;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.detail-item {
+  background: rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.detail-item:hover {
+  transform: translateY(-2px);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.detail-icon {
+  color: var(--accent-color);
+}
+
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.detail-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.detail-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+/* Loading & Error */
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+}
+
+.error {
+  color: #fca5a5;
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+/* Spin animation for loading */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+/* Slide Up Animation */
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Theme Classes - applied to the body element using a wrapper */
+.theme-clear-day {
+  --bg-color-top: #38bdf8;
+  --bg-color-bottom: #0284c7;
+  --accent-color: #fde047;
+}
+
+.theme-clear-night {
+  --bg-color-top: #0f172a;
+  --bg-color-bottom: #1e293b;
+  --accent-color: #cbd5e1;
+}
+
+.theme-cloudy {
+  --bg-color-top: #64748b;
+  --bg-color-bottom: #334155;
+  --accent-color: #e2e8f0;
+}
+
+.theme-rain {
+  --bg-color-top: #1e293b;
+  --bg-color-bottom: #0f172a;
+  --accent-color: #60a5fa;
+}
+
+.theme-snow {
+  --bg-color-top: #94a3b8;
+  --bg-color-bottom: #e2e8f0;
+  --accent-color: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --glass-bg: rgba(255, 255, 255, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.5);
+}
+
+.theme-snow .temperature {
+  background: linear-gradient(to bottom, #0f172a, #475569);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.theme-snow .search-input {
+  background: rgba(255, 255, 255, 0.5);
+  color: #1e293b;
+}
+
+.theme-snow .search-input::placeholder {
+  color: #64748b;
+}
+
+.theme-snow .detail-item {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.theme-thunderstorm {
+  --bg-color-top: #0f172a;
+  --bg-color-bottom: #000000;
+  --accent-color: #818cf8;
+}
